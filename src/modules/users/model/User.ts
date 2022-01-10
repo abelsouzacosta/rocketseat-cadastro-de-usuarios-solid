@@ -1,12 +1,12 @@
 import { v4 as uuidV4 } from "uuid";
 
 class User {
-  protected id?: string;
-  protected name: string;
-  protected admin: boolean;
-  protected email: string;
-  protected created_at: Date;
-  protected updated_at: Date;
+  public id?: string;
+  public name: string;
+  public admin: boolean;
+  public email: string;
+  public created_at: Date;
+  public updated_at: Date;
 
   constructor() {
     this.id = this.id ? this.id : uuidV4();
