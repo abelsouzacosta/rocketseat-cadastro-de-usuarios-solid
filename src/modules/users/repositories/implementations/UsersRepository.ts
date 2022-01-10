@@ -18,9 +18,7 @@ class UsersRepository implements IUsersRepository {
     return UsersRepository.INSTANCE;
   }
 
-  create({ name, email }: ICreateUserDTO): User {
-    // Complete aqui
-  }
+  create({ name, email }: ICreateUserDTO): User {}
 
   findById(id: string): User | undefined {
     // Complete aqui

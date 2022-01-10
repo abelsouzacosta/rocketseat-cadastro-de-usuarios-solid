@@ -8,10 +8,8 @@ class User {
   protected created_at: Date;
   protected updated_at: Date;
 
-  constructor(name: string, email: string) {
+  constructor() {
     this.id = this.id ? this.id : uuidV4();
-    this.name = name;
-    this.email = email;
   }
 }
 
