@@ -10,6 +10,7 @@ class User {
 
   constructor() {
     this.id = this.id ? this.id : uuidV4();
+    this.admin = false;
   }
 }
 
