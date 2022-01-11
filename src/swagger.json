@@ -1,0 +1,325 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Cadastro de usuários",
+    "description": "Essa é uma api de cadastro de usuários",
+    "version": "1.0.0",
+    "contact": {
+      "email": "abelsouzacosta@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a new User",
+        "description": "Insert a new user in the database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "object"
+                  },
+                  "email": {
+                    "type": "object"
+                  }
+                },
+                "example": {
+                  "name": "Abel Souza",
+                  "email": "abelsouzacosta@gmail.com" 
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "c6f93a7e-70c9-4fc5-935c-a0b352264845"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Abel Junior"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "abelsouzacosta@gmail.com"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "021-03-10T22:10:32.99wz" 
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "021-03-10T22:10:32.99wz" 
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email already taken",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "example": "Email already taken"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Users"], 
+        "summary": "Retorna todos os usuários",
+        "description": "Somente usuário admin pode acessar.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "admin": {
+                        "type": "boolean",
+                        "example": "false"
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "a232d32323-23ed-24dddf"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Rocketseat"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "oi@rocketseat.com.br"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2021-03-10T22:10:32.99wz"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2021-03-10T22:10:32.99wz"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário sem permissão ou Usuário não encontrado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "You need to be an administrator to list all users."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get/{user_id}": {
+        "tags": ["Users"],
+        "summary": "Get a profile from a user",
+        "description": "Return an user profile",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "parameters": {
+                  "name": "user_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Returns an specific user",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "a232d32323-23ed-24dddf"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Rocketseat"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "oi@rocketseat.com.br"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2021-03-10T22:10:32.99wz"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2021-03-10T22:10:32.99wz"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "User not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Gives the admin role to an user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "admin": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "a232d32323-23ed-24dddf"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Rocketseat"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "oi@rocketseat.com.br"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2021-03-10T22:10:32.99wz"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2021-03-10T22:10:32.99wz"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "User not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
